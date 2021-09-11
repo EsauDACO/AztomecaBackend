@@ -13,7 +13,8 @@ exports.verifyToken = (req,res,next) => {
     const {headload, signature} = req.cookies
 
     if(!headload || !signature) return res.status(401).json({msg: 'Token invalido'})
-    jwt.verify(headload+signature, process.env.SECRET, (err, decoded)=>{
+    //Nota, el jwt es dividido por '.' si no se coloca de la siguiente manera, el codigo no va a regresar los datos de validacion
+        jwt.verify(`${headload}.${signature}`, process.env.SECRET, (err, decoded)=>{
         if(err) return res.status(401).json({msg:'Token invalido'})
         User.findById(decoded.userId)
         .then(user =>{

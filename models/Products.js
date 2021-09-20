@@ -5,24 +5,33 @@ const Products = new Schema ({
         type: String,
         required: [true,"Debes de colocar un nombre al producto"]
     },
-    price: {
-        type: Number,
-        min: 0
-    },
     description: {
         type: String,
         required: [true, "Escribe una descripcion para tu producto"],
         max: 300
     },
-    category: {
+    price: {
+        type: Number,
+        min: 0
+    },
+    brand: {
         type:String,
-        default: "Juhue",
+        default: "Otro",
         enum: ['Juhue', 'Yutsil','Aguamielera','Kofi Bar', 'Otro']
+    },
+    kind:{
+        type:String,
+        default: 'Otro',
+        enum: ['Alcoholes', 'Textiles', 'Gourmet', 'Otro'],
     },
     img: {
         type:String,
         default: "https://res.cloudinary.com/dxabmmloo/image/upload/v1629858341/AzAltaColor_fbfsue.jpg"
     },
+    doesitnew: {
+        type: Boolean,
+        default: true
+    }
 },{timestamps: true});
 
 module.exports = model('Products', Products)
